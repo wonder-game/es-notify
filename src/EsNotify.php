@@ -19,9 +19,7 @@ class EsNotify
             throw new \Exception('EsNotify name already exists: ' . $name);
         }
 
-        $className = $Config->notifyClassName();
-        /** @var NotifyInterface $class */
-        $class = new $className();
+        $class = $Config->getNotifyClass();
         $class->register($Config);
 
         $this->container[$name] = $class;

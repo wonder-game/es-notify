@@ -3,6 +3,7 @@
 namespace WonderGame\EsNotify\WeChat;
 
 use WonderGame\EsNotify\Interfaces\ConfigInterface;
+use WonderGame\EsNotify\Interfaces\NotifyInterface;
 use EasySwoole\Spl\SplBean;
 
 class Config extends SplBean implements ConfigInterface
@@ -107,8 +108,8 @@ class Config extends SplBean implements ConfigInterface
         return $this->url;
     }
 
-    public function notifyClassName()
+    public function getNotifyClass(): NotifyInterface
     {
-        return Notify::class;
+        return new Notify();
     }
 }
