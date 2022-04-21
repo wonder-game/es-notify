@@ -1,0 +1,16 @@
+{
+  "name": "wonder-game/es-notify",
+  "description": "Notification utility",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.2",
+    "easyswoole/http-client": "^1.x",
+    "easyswoole/wechat": "^2.x"
+  },
+  "autoload": {
+    "psr-4": {
+      "WonderGame\\EsNotify\\": "src"
+    }
+  }
+}
