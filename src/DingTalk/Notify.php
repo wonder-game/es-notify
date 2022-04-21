@@ -2,7 +2,18 @@
 
 namespace WonderGame\EsNotify\DingTalk;
 
-class Notify
-{
+use WonderGame\EsNotify\Interfaces\ConfigInterface;
+use WonderGame\EsNotify\Interfaces\NotifyInterface;
 
+class Notify implements NotifyInterface
+{
+    public function register(ConfigInterface $Config)
+    {
+
+    }
+
+    public function does(array $params)
+    {
+        var_dump(__METHOD__);
+    }
 }

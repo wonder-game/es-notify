@@ -2,7 +2,12 @@
 
 namespace WonderGame\EsNotify\DingTalk;
 
-class Config
-{
+use WonderGame\EsNotify\Interfaces\ConfigInterface;
 
+class Config implements ConfigInterface
+{
+    public function notifyClassName()
+    {
+        return Notify::class;
+    }
 }
