@@ -5,6 +5,7 @@ namespace WonderGame\EsNotify\WeChat;
 use EasySwoole\WeChat\Factory;
 use EasySwoole\WeChat\OfficialAccount\Application as OfficialAccount;
 use WonderGame\EsNotify\Interfaces\ConfigInterface;
+use WonderGame\EsNotify\Interfaces\MessageInterface;
 use WonderGame\EsNotify\Interfaces\NotifyInterface;
 
 class Notify implements NotifyInterface
@@ -19,11 +20,8 @@ class Notify implements NotifyInterface
      */
     protected $OfficialAccount = null;
 
-    /**
-     * @param Config $Config
-     * @return void
-     */
-    public function register(ConfigInterface $Config)
+
+    public function __construct(ConfigInterface $Config)
     {
         $configArray = array_merge(
             [
@@ -40,30 +38,25 @@ class Notify implements NotifyInterface
 
     /**
      * @document http://www.easyswoole.com/Components/WeChat2.x/officialAccount/templateMessage.html
-     * @param array $params [template => 模板id, data => 要发送的数据]
+     * @param MessageInterface $message
      * @return void
      */
-    public function does(array $params)
+    public function does(MessageInterface $message)
     {
         $url = $this->Config->getUrl();
         $toOpenid = $this->Config->getToOpenid();
 
-        foreach (['template', 'data'] as $col)
-        {
-            if (empty($params[$col]))
-            {
-                return;
-            }
-        }
+
+        list($templateId, $data) = $message->fullData();
 
         foreach ($toOpenid as $openid)
         {
             try {
                 $this->OfficialAccount->templateMessage->send([
                     'touser' => $openid,
-                    'template_id' => $params['template'],
+                    'template_id' => $templateId,
                     'url' => $url,
-                    'data' => $params['data'],
+                    'data' => $data,
                 ]);
             }
             // 未关注、取消关注 或 其他

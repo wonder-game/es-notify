@@ -110,6 +110,6 @@ class Config extends SplBean implements ConfigInterface
 
     public function getNotifyClass(): NotifyInterface
     {
-        return new Notify();
+        return new Notify($this);
     }
 }

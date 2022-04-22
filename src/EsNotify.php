@@ -4,6 +4,7 @@ namespace WonderGame\EsNotify;
 
 use EasySwoole\Component\Singleton;
 use WonderGame\EsNotify\Interfaces\ConfigInterface;
+use WonderGame\EsNotify\Interfaces\MessageInterface;
 use WonderGame\EsNotify\Interfaces\NotifyInterface;
 
 class EsNotify
@@ -19,10 +20,7 @@ class EsNotify
             throw new \Exception('EsNotify name already exists: ' . $name);
         }
 
-        $class = $Config->getNotifyClass();
-        $class->register($Config);
-
-        $this->container[$name] = $class;
+        $this->container[$name] = $Config->getNotifyClass();
     }
 
     public function getContainer(string $name):? NotifyInterface
@@ -36,28 +34,11 @@ class EsNotify
      * @param array $params
      * @return void
      */
-    public function doesOne(string $name, array $params = [])
+    public function doesOne(string $name, MessageInterface $message)
     {
         if ($Notify = $this->getContainer($name))
         {
-            $Notify->does($params);
-        }
-    }
-
-    /**
-     * 执行所有
-     * @param array $params
-     * @return void
-     */
-    public function doesAll(array $params = [])
-    {
-        /**
-         * @var string $name
-         * @var NotifyInterface $Notify
-         */
-        foreach ($this->container as $name => $Notify)
-        {
-            $Notify->does($params);
+            $Notify->does($message);
         }
     }
 }
