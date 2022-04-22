@@ -14,11 +14,6 @@ class Warning extends Base
 
     protected $color = '#FF0000';
 
-    public function getTmpId()
-    {
-        return '4yLeX5lg1E1u8euzYwNx8IX8i5wtMY3cf-QRJ9HVyW4';
-    }
-
     public function struct()
     {
         return [

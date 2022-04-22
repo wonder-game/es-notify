@@ -10,11 +10,6 @@ class Notice extends Base
 
     protected $color = '#32CD32';
 
-    public function getTmpId()
-    {
-        return 'bzuNFewc_MxyTJzAnNzqOQHFzXvvfQ-dTqmKINQvbF8';
-    }
-
     public function struct()
     {
         return [

@@ -10,12 +10,22 @@ use WonderGame\EsNotify\Interfaces\MessageInterface;
  */
 abstract class Base extends SplBean implements MessageInterface
 {
-    abstract public function getTmpId();
+    protected $templateId = '';
+
+    public function setTemplateId($templateId)
+    {
+        $this->templateId = $templateId;
+    }
+
+    public function getTemplateId()
+    {
+        return $this->templateId;
+    }
 
     abstract public function struct();
 
     public function fullData()
     {
-        return [$this->getTmpId(), $this->struct()];
+        return [$this->getTemplateId(), $this->struct()];
     }
 }
