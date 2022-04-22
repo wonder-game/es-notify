@@ -49,6 +49,12 @@ class Notify implements NotifyInterface
 
         list($templateId, $data) = $message->fullData();
 
+        if (!$templateId)
+        {
+            // todo 异常处理
+            return;
+        }
+
         foreach ($toOpenid as $openid)
         {
             try {

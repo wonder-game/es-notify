@@ -13,6 +13,11 @@ class EsNotify
 
     protected $container = [];
 
+    protected function getContainer(string $name):? NotifyInterface
+    {
+        return $this->container[$name] ?? null;
+    }
+
     public function register(ConfigInterface $Config, string $name = 'default')
     {
         if (isset($this->container[$name]))
@@ -21,11 +26,6 @@ class EsNotify
         }
 
         $this->container[$name] = $Config->getNotifyClass();
-    }
-
-    public function getContainer(string $name):? NotifyInterface
-    {
-        return $this->container[$name] ?? null;
     }
 
     /**
@@ -41,4 +41,7 @@ class EsNotify
             $Notify->does($message);
         }
     }
+
+    // 钉钉和微信的 Config Message 不能混用，需识别类型
+//    public function doesAll()
 }
