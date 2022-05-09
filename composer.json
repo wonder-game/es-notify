@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.2",
-    "easyswoole/easyswoole": "^3.4",
+    "easyswoole/easyswoole": "3.4.x",
     "easyswoole/http-client": "^1.5",
     "easyswoole/wechat": "^2.0"
   },
