@@ -20,6 +20,12 @@ class Config extends SplBean implements ConfigInterface
      */
     protected $signKey = '';
 
+    /**
+     * 要@哪些人（手机号）, true-所有人,false-谁也不鸟
+     * @var array|bool
+     */
+    protected $at = false;
+
     public function setUrl($url)
     {
         $this->url = $url;
@@ -38,6 +44,16 @@ class Config extends SplBean implements ConfigInterface
     public function getSignKey()
     {
         return $this->signKey;
+    }
+
+    public function setAt($at)
+    {
+        $this->at = $at;
+    }
+
+    public function getAt()
+    {
+        return $this->at;
     }
 
     public function getNotifyClass(): NotifyInterface

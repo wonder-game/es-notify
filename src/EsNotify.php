@@ -13,31 +13,30 @@ class EsNotify
 
     protected $container = [];
 
-    protected function getContainer(string $name):? NotifyInterface
+    protected function getContainer(string $type, string $name = 'default'): ?NotifyInterface
     {
-        return $this->container[$name] ?? null;
+        return $this->container[$type][$name] ?? null;
     }
 
-    public function register(ConfigInterface $Config, string $name = 'default')
+    public function register(ConfigInterface $Config, string $type, string $name = 'default')
     {
-        if (isset($this->container[$name]))
-        {
-            throw new \Exception('EsNotify name already exists: ' . $name);
+        if (isset($this->container[$type][$name])) {
+            throw new \Exception("EsNotify name already exists: $type.$name");
         }
 
-        $this->container[$name] = $Config->getNotifyClass();
+        $this->container[$type][$name] = $Config->getNotifyClass();
     }
 
     /**
      * 执行某一个
-     * @param string $name
+     * @param string $type 类型：dingtalk、wechat
      * @param array $params
+     * @param string $name
      * @return void
      */
-    public function doesOne(string $name, MessageInterface $message)
+    public function doesOne(string $type, MessageInterface $message, string $name = 'default')
     {
-        if ($Notify = $this->getContainer($name))
-        {
+        if ($Notify = $this->getContainer($type, $name)) {
             $Notify->does($message);
         }
     }
