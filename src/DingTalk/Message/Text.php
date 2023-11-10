@@ -11,7 +11,7 @@ class Text extends Base
         return [
             'msgtype' => 'text',
             'text' => [
-                'content' => $this->getAtText($this->content)
+                'content' => $this->getServerText($this->getAtText($this->content))
             ],
             'at' => [
                 'atMobiles' => $this->atMobiles,

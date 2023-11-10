@@ -2,10 +2,16 @@
 
 namespace WonderGame\EsNotify\WeChat;
 
+use EasySwoole\Spl\SplBean;
 use WonderGame\EsNotify\Interfaces\ConfigInterface;
 use WonderGame\EsNotify\Interfaces\NotifyInterface;
-use EasySwoole\Spl\SplBean;
 
+/**
+ * @document https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
+ *
+ * 更新公告：https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&announce_id=11680142498cInTZ&version=&lang=zh_CN&token=2080631067
+ *
+ */
 class Config extends SplBean implements ConfigInterface
 {
     /**
@@ -86,8 +92,7 @@ class Config extends SplBean implements ConfigInterface
 
     public function setToOpenid($openid)
     {
-        if (is_string($openid))
-        {
+        if (is_string($openid)) {
             $openid = [$openid];
         }
         $this->toOpenid = $openid;
